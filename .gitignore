@@ -1,0 +1,5 @@
+node_modules
+.DS_Store
+.codelite/**/*.*
+.idea/**/*.*
+node_modules/**/*.*
