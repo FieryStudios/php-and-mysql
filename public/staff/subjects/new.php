@@ -1,16 +1,32 @@
-<?php require_once('../../../private/initialize.php'); 
+<?php require_once('../../../private/initialize.php');
 
-// headers and page redirection 
-$test = $_GET['test'] ?? '';
+if(is_post_request()){
+// Handle form values sent by new.php
+$subject = [];
+$subject['menu_name'] = $_POST['menu_name'] ?? '';
+$subject['position'] = $_POST['position'] ?? '';
+$subject['visible'] = $_POST['visible'] ?? '';
 
-if($test == '404'){
-	error_404();	
-} elseif($test == '500'){
-	error_500();
-}  elseif($test == 'redirect'){
-	redirect_to('/kpl.php');
+$result = insert_subject($subject);
+	if ($result === true){
+		$new_id = mysqli_insert_id($db);
+
+		redirect_to('/staff/subjects/show.php?id=' . $new_id);
+		
+	}else {
+		$errors = $result;
+	}
+	
+} else {
+	$errors = [];
 }
 
+
+	$subject_set = find_all_subjects();
+	$subject_count = mysqli_num_rows($subject_set) + 1;
+	$subject = [];
+	$subject['position'] = $subject_count;
+	mysqli_free_result($subject_set);
 ?>
 <!doctype html>
 <?php $page_title ="CREATE NEW SUBJECT" ?>
@@ -27,8 +43,15 @@ if($test == '404'){
 		<h3>Create New Subject</h3>
 
 		  <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php'); ?>">&laquo; Back to List</a>
-
-			<form action="<?php echo url_for('/staff/subjects/create.php'); ?>" method="post">
+			<?php 
+			
+			
+				if($errors){
+				
+					echo display_errors($errors);
+				}
+			?>
+			<form action="<?php echo url_for('/staff/subjects/new.php'); ?>" method="post">
 			  <dl>
 				<dt>Menu Name</dt>
 				<dd><input type="text" name="menu_name" value="" /></dd>
@@ -36,7 +59,18 @@ if($test == '404'){
 			  <dl>
 				<dt>Position</dt>
 				<dd>
-				  <input type="number" name="position" placeholder="1">
+				  <select name="position">
+					<?php 
+						for($i = 1; $i <= $subject_count; $i++){
+								echo "<option value=\"{$i}\"";
+								if($subject["position"] == $i){
+									echo " selected ";
+								}
+								echo">{$i}</option>";
+								
+						}
+					?>
+				  </select>
 				</dd>
 			  </dl>
 			  <dl>

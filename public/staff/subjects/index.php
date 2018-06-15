@@ -22,7 +22,7 @@ $subject_set = find_all_subjects();
 				<h1>Subjects</h1>
 
 				<div class="actions">
-				  <a class="action" href="<?php echo url_for('/staff/subjects/new.php'); ?>">Create New Subject</a>
+				  <a class="action" href="<?php echo url_for('/staff/subjects/create.php'); ?>">Create New Subject</a>
 				</div>
 
 				<table class="list">
@@ -44,7 +44,7 @@ $subject_set = find_all_subjects();
 						<td><?php echo $subject['menu_name']; ?></td>
 					  <td><a class="action" href="<?php echo url_for('/staff/subjects/show.php?id=' . $subject['id']); ?>">View</a></td>
 					  <td><a class="action" href="<?php echo url_for('/staff/subjects/edit.php?id=' . $subject['id']); ?>">Edit</a></td>
-					  <td><a class="action" href="">Delete</a></td>
+					  <td><a class="action" href="<?php echo url_for('/staff/subjects/delete.php?id=' . $subject['id']); ?>">Delete</a></td>
 					  </tr>
 				  <?php } ?>
 				</table>
