@@ -12,7 +12,7 @@ function find_all_subjects(){
 function find_subject_by_id($id ){
 	global $db;
 	 $sql = "SELECT * FROM subjects ";
-	 $sql .= "WHERE id='" . $id . "'";
+	 $sql .= "WHERE id='" . db_escape($db, $id) . "'";
 	 $result = mysqli_query($db, $sql);
 	 confirm_query($result);
 	 
@@ -33,9 +33,9 @@ function insert_subject($subject){
 	$sql .= "(menu_name, position, visible)";
 	$sql .= "VALUES (";
 
-	$sql .=  "'" . $subject['menu_name'] . "',";
-	$sql .=  "'" . $subject['position'] . "',";
-	$sql .=  "'" . $subject['visible'] . "' )";
+	$sql .=  "'" . db_escape($db, $subject['menu_name']) . "',";
+	$sql .=  "'" . db_escape($db, $subject['position'] . "',";
+	$sql .=  "'" . db_escape($db, $subject['visible'] . "' )";
 
 	$result = mysqli_query($db, $sql);
 
@@ -56,12 +56,12 @@ function update_subject($subject){
 		return $errors;
 	}
 	$sql = "UPDATE subjects SET ";
-	$sql .= "menu_name = '" . $subject['menu_name'];
+	$sql .= "menu_name = '" . db_escape($db, $subject['menu_name']);
 	
-	$sql .= "', position = '" . $subject['position'];
+	$sql .= "', position = '" . db_escape($db, $subject['position'];
 	
-	$sql .= "', visible = '" . $subject['visible'];
-	$sql .= "' WHERE id ='" . $subject['id'] . "'";
+	$sql .= "', visible = '" . db_escape($db, $subject['visible'] );
+	$sql .= "' WHERE id ='" . db_escape($db, $subject['id'] ) . "'";
 	$sql .= " LIMIT 1";
 
 	$result = mysqli_query($db, $sql);
@@ -78,7 +78,7 @@ function update_subject($subject){
 function delete_subject($id){
 	global $db;
 	$sql = "DELETE FROM subjects ";
-	$sql .= "WHERE id='" .$id . "'";
+	$sql .= "WHERE id='" . db_escape($db, $id) . "'";
 	$sql .= " LIMIT 1;";
 	
 	$result = mysqli_query($db, $sql);
@@ -101,5 +101,12 @@ function find_all_pages(){
 	confirm_query($result);
 	return $result;
 };
+	
+/* Sanitizes data */
+/* Prevents the Bobby Tables scenario */
+/* https://xkcd.com/327/ */
+function db_escape($connection, $string){
+	return mysqli_real_escape_string($connection, $string);
+}	
 	
 ?>
