@@ -5,20 +5,17 @@ var minifyCss = require('gulp-clean-css');
 var rename = require('gulp-rename');
 
 var paths = {
-  sass: ['./public/styles/sass/*.sass']
+  sass: ['./public/styles/sass/*.scss']
 };
 
 gulp.task('sass', function(done) {
   gulp.src(paths.sass)
-    .pipe(sass())
+    .pipe(sass({errLogToConsole: true}))
     .pipe(gulp.dest('./public/styles/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
+    .pipe(minifyCss())
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./public/styles/css/'))
-    .on('end', done);
-});
+    .on('end', done)});
 
 
 gulp.task('watch', function() {

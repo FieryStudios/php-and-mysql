@@ -3,3 +3,4 @@ node_modules
 .codelite/**/*.*
 .idea/**/*.*
 node_modules/**/*.*
+private/db_credentials.php

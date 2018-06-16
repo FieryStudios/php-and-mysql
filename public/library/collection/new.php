@@ -1,24 +1,24 @@
 <?php require_once('../../../private/initialize.php');
 
 if(is_post_request()){
-//id, item_name, author_name, description, publisher, isbn 
+//id, item_name, author_name, description, publisher, isbn
 $item = [];
-$item['item_name'] = $_POST['item_name'] ?? '';
-$item['author_name'] = $_POST['author_name'] ?? '';
-$item['description'] = $_POST['description'] ?? '';
-$item['publisher'] = $_POST['publisher'] ?? '';
-$item['isbn'] = $_POST['isbn'] ?? '';
+$item['item_name'] = isset($_POST['item_name']) ? $_POST['item_name'] : 'null';
+$item['author_name'] = isset($_POST['author_name']) ? $_POST['author_name'] : 'null';
+$item['description'] = isset($_POST['description']) ? $_POST['description'] : 'null';
+$item['publisher'] = isset($_POST['publisher']) ? $_POST['publisher'] : 'null';
+$item['isbn'] = isset($_POST['isbn']) ? $_POST['isbn'] : 'null';
 
 $result = insert_item($item);
 	if ($result === true){
 		$new_id = mysqli_insert_id($db);
 
 		redirect_to('/library/collection/view.php?id=' . $new_id);
-		
+
 	}else {
 		$errors = $result;
 	}
-	
+
 } else {
 	$errors = [];
 }
@@ -36,13 +36,13 @@ $result = insert_item($item);
    <div class="container">
    <?php include(SHARED_PATH . '/navigation.php') ?>
 
-	<section> 
+	<section>
 	  <div class="row">
 		<div class="col-12">
 		<h3><?php echo h($page_title); ?></h3>
-			<?php 
+			<?php
 				if($errors){
-				
+
 					echo display_errors($errors);
 				}
 			?>
@@ -58,7 +58,7 @@ $result = insert_item($item);
 			   <dl>
 				<dt>Publication</dt>
 				<dd><input type="text" name="publisher" value="" placeholder="Enter a publication name" required /></dd>
-			  </dl>			  
+			  </dl>
 			   <dl>
 				<dt>ISBN</dt>
 				<dd><input type="text" name="isbn" value="" placeholder="Enter an ISBN" required /></dd>
@@ -68,13 +68,13 @@ $result = insert_item($item);
 				<dd><textarea rows="4" cols="50" name="description" placeholder="Enter a description" required /></textarea></dd>
 			  </dl>
 			  <div>
-				<input type="submit" value="Create item" />
+				<input class="btn btn-info" type="submit" value="Create item" />
 			  </div>
 			</form>
 
 		</div>
 	  </div>
-	  
+
 	   <a class="btn btn-primary" href="<?php echo url_for('/library/collection/index.php'); ?>">&laquo; Return to Collection List</a>
 	</section>
 	<?php include(SHARED_PATH . '/footer.php') ?>

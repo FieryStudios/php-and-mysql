@@ -1,25 +1,27 @@
-<?php require_once('../../../private/initialize.php'); 
+<?php require_once('../../../private/initialize.php');
 
-$id = $_GET['id'] ?? '1';
+ $id = isset($_GET['id']) ? $_GET['id'] : '1';
+
+ //$id = $_GET['id'] ?? '1';  godaddy is using old PHP :(
 
 if(is_post_request()){
-	
-	//id, item_name, author_name, description, publisher, isbn 
+
+	//id, item_name, author_name, description, publisher, isbn
 	$item = [];
 	$item['id'] = $id;
-	$item['item_name'] = $_POST['item_name'] ?? '';
-	$item['author_name'] = $_POST['author_name'] ?? '';
-	$item['description'] = $_POST['description'] ?? '';
-	$item['publisher'] = $_POST['publisher'] ?? '';
-	$item['isbn'] = $_POST['isbn'] ?? '';
-	
+	$item['item_name'] = isset($_POST['item_name']) ? $_POST['item_name'] : 'null';
+	$item['author_name'] = isset($_POST['author_name']) ? $_POST['author_name'] : 'null';
+	$item['description'] = isset($_POST['description']) ? $_POST['description'] : 'null';
+	$item['publisher'] = isset($_POST['publisher']) ? $_POST['publisher'] : 'null';
+	$item['isbn'] = isset($_POST['isbn']) ? $_POST['isbn'] : 'null';
+
 	$result = update_item($item);
 if ($result === true){
-	redirect_to('/library/collection/view.php?id=' . $id); 	
+	redirect_to('/library/collection/view.php?id=' . $id);
 }else{
 	$errors = $result;
 }
-	
+
 } else{
 	$item = find_item_by_id($id);
 	$errors = [];
@@ -27,7 +29,7 @@ if ($result === true){
 
 	$item_set = find_all_items();
 	$item_count = mysqli_num_rows($item_set);
-	
+
 	mysqli_free_result($item_set);
 
 ?>
@@ -40,15 +42,15 @@ if ($result === true){
    <div class="container">
    <?php include(SHARED_PATH . '/navigation.php') ?>
 
-	<section> 
+	<section>
 	  <div class="row">
 		<div class="col-12">
 
 		<h3><?php echo h($page_title); ?></h3>
 
-			<?php 
+			<?php
 				$output = display_errors($errors);
-				
+
 				echo $output;
 			?>
 			<form action="<?php echo url_for('/library/collection/edit.php?id=' . h(u($id))); ?>" method="post">
@@ -74,7 +76,7 @@ if ($result === true){
 					<dd><textarea rows="4" cols="50" name="description" required /><?php echo h($item['description']); ?></textarea></dd>
 				</dl>
 			  <div id="operations">
-				<input type="submit" value="Edit record" />
+				<input class="btn btn-warning" type="submit" value="Edit record" />
 			  </div>
 			</form>
 
@@ -82,7 +84,7 @@ if ($result === true){
 	  </div>
 	</section>
 	<a class="btn btn-primary" href="<?php echo url_for('/library/collection/index.php'); ?>">&laquo; Return to Collection List</a>
-	
+
 	<?php include(SHARED_PATH . '/footer.php') ?>
 
 	</div>
