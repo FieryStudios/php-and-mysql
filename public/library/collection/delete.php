@@ -1,19 +1,19 @@
 <?php require_once('../../../private/initialize.php');
 
 if(!isset($_GET['id'])){
-		redirect_to_url('/staff/subjects/index.php');
+		redirect_to_url('/library/collection/index.php');
 	}
 	$id = $_GET['id'];
 	
 	if(is_post_request()){
-		$result = delete_subject($id);
-		redirect_to('/staff/subjects/index.php');
+		$result = delete_item($id);
+		redirect_to('/library/collection/index.php');
 	} else{
-		$subject = find_subject_by_id($id);
+		$item = find_item_by_id($id);
 	}
 ?>
 <!doctype html>
-<?php $page_title ="DELETE SUBJECT" ?>
+<?php $page_title ="Delete Record for " . h($item['item_name']); ?>
 <html lang="en">
 
 	<?php require(SHARED_PATH . '/head.php') ?>
@@ -24,20 +24,20 @@ if(!isset($_GET['id'])){
 	<section> 
 	  <div class="row">
 		<div class="col-12">
-		<h3>Delete Subject</h3>
+		<h3><?php echo h($page_title); ?></h3>
 
-		  <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php'); ?>">&laquo; Back to List</a>
-			<p>Are you sure you want to delete "<b><?php echo $subject['menu_name'] ?>"</b>?</p>
-			
-				
-			<form action="<?php echo url_for('/staff/subjects/delete.php?id=' . h(u($subject['id']))); ?>" method="post">
+			<p>Are you sure you want to delete "<strong><?php echo $item['item_name'] ?>"</strong>?</p>
+						
+			<form action="<?php echo url_for('/library/collection/delete.php?id=' . h(u($item['id']))); ?>" method="post">
 			 
-			 <input type="submit" value="Yes, Delete This Record" name="submit" />
+			 <input class="btn btn-danger" type="submit" value="Yes, Delete This Record" name="submit" />
 			</form>
 
 		</div>
 	  </div>
 	</section>
+	<a class="btn btn-primary" href="<?php echo url_for('/library/collection/index.php'); ?>">&laquo; Return to Collection List</a>
+	
 	<?php include(SHARED_PATH . '/footer.php') ?>
 
 	</div>

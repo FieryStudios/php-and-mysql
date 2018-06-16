@@ -1,7 +1,7 @@
 {
  "m_name": "KPL",
  "m_isActive": true,
- "m_importFileSpec": "*.php;*.php5;*.inc;*.phtml;*.js;*.html;*.css;*.scss;*.less;*.json;*.xml;*.ini;*.md;*.txt;*.text;.htaccess;*.ctp",
+ "m_importFileSpec": "*.php;*.php5;*.inc;*.phtml;*.js;*.html;*.css;*.scss;*.less;*.json;*.xml;*.ini;*.md;*.txt;*.text;.htaccess;*.ctp;*.sass;*.scss",
  "m_excludeFolders": ".git;.svn;.codelite;.clang",
  "settings": {
   "m_runAs": 0,

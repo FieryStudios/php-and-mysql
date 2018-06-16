@@ -1,12 +1,12 @@
 <?php require_once('../../../private/initialize.php') ?>
 <?php
 
-$subject_set = find_all_subjects();
+$item_set = find_all_items();
 
 ?>
 
 <!doctype html>
-<?php $page_title ="SUBJECTS" ?>
+<?php $page_title ="Collection" ?>
 <html lang="en">
 
 	<?php require(SHARED_PATH . '/head.php') ?>
@@ -18,33 +18,31 @@ $subject_set = find_all_subjects();
 	  <div class="row">
 		<div class="col-12">
 			<div id="content">
-			  <div class="subjects listing">
-				<h1>Subjects</h1>
+			  <div class="items listing">
+				<h3><?php echo h($page_title); ?></h3>
 
 				<div class="actions">
-				  <a class="action" href="<?php echo url_for('/staff/subjects/create.php'); ?>">Create New Subject</a>
+				  <a class="btn btn-primary" href="<?php echo url_for('/library/collection/new.php'); ?>">Add new item to collection</a>
 				</div>
 
-				<table class="list">
+				<table class="table table-striped table-bordered table-condensed">
 				  <tr>
-					<th>ID</th>
-					<th>Position</th>
-					<th>Visible</th>
-					<th>Name</th>
+					<th>Item Name</th>
+					<th>Author Name</th>
+					<th>ISBN</th>
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 				  </tr>
 
-				  <?php while($subject = mysqli_fetch_assoc($subject_set)) { ?>
+				  <?php while($item = mysqli_fetch_assoc($item_set)) { ?>
 					<tr>
-					  <td><?php echo $subject['id']; ?></td>
-					  <td><?php echo $subject['position']; ?></td>
-					  <td><?php echo $subject['visible'] == 1 ? 'true' : 'false'; ?></td>
-						<td><?php echo $subject['menu_name']; ?></td>
-					  <td><a class="action" href="<?php echo url_for('/staff/subjects/show.php?id=' . $subject['id']); ?>">View</a></td>
-					  <td><a class="action" href="<?php echo url_for('/staff/subjects/edit.php?id=' . $subject['id']); ?>">Edit</a></td>
-					  <td><a class="action" href="<?php echo url_for('/staff/subjects/delete.php?id=' . $subject['id']); ?>">Delete</a></td>
+					  <td><?php echo $item['item_name']; ?></td>
+					  <td><?php echo $item['author_name']; ?></td>
+					  <td><?php echo $item['isbn']; ?></td>
+					  <td><a class="btn btn-info" href="<?php echo url_for('/library/collection/view.php?id=' . $item['id']); ?>">View Full Record</a></td>
+					  <td><a class="btn btn-warning" href="<?php echo url_for('/library/collection/edit.php?id=' . $item['id']); ?>">Edit</a></td>
+					  <td><a class="btn btn-danger" href="<?php echo url_for('/library/collection/delete.php?id=' . $item['id']); ?>">Delete</a></td>
 					  </tr>
 				  <?php } ?>
 				</table>
@@ -54,7 +52,7 @@ $subject_set = find_all_subjects();
 	  </div>
 	</section>
 	<?php 
-		mysqli_free_result($subject_set);
+		mysqli_free_result($item_set);
 	?>	
 	<?php 
 		include(SHARED_PATH . '/footer.php') 

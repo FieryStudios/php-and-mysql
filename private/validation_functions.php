@@ -61,34 +61,39 @@ function has_valid_email_format($value){
 
 }
 
-function validate_subject($subject) {
+function validate_item($item) {
 
   $errors = [];
+  // 	id, item_name, author_name, description, publisher, isbn
   
-  // menu_name
-  if(is_blank($subject['menu_name'])) {
-    $errors['menu_name'] = "Name cannot be blank.";
-  }elseif(!has_length($subject['menu_name'], ['min' => 2, 'max' => 255])) {
-    $errors['menu_name'] = "Name must be between 2 and 255 characters.";
+  // Name fields 
+  if(is_blank($item['item_name'])) {
+    $errors['item_name'] = "Item name cannot be left blank.";
+  }elseif(!has_length($item['item_name'], ['min' => 2, 'max' => 255])) {
+    $errors['item_name'] = "Item name must be between 2 and 255 characters.";
+  }
+  
+ if(is_blank($item['author_name'])) {
+    $errors['author_name'] = "Author name cannot be left blank.";
+  }elseif(!has_length($item['author_name'], ['min' => 2, 'max' => 255])) {
+    $errors['author_name'] = "Author name must be between 2 and 255 characters.";
   }
 
-  // position
-  // Make sure we are working with an integer
-  $postion_int = (int) $subject['position'];
-  if($postion_int <= 0) {
-    $errors['position'] = "Position must be greater than zero.";
-  }
-  if($postion_int > 999) {
-    $errors['position'] = "Position must be less than 999.";
+  if(is_blank($item['description'])) {
+    $errors['description'] = "Description cannot be left blank.";
   }
 
-  // visible
-  // Make sure we are working with a string
-  $visible_str = (string) $subject['visible'];
-  if(!has_inclusion_of($visible_str, ["0","1"])) {
-    $errors['visible'] = "Visible must be true or false.";
+ if(is_blank($item['publisher'])) {
+    $errors['publisher'] = "Publisher cannot be left blank.";
+  }elseif(!has_length($item['publisher'], ['min' => 2, 'max' => 255])) {
+    $errors['publisher'] = "Publisher's name must be between 2 and 255 characters.";
   }
-
+  
+  if(is_blank($item['isbn'])) {
+    $errors['isbn'] = "Publisher cannot be left blank.";
+  }elseif(!has_length($item['isbn'], ['min' => 9, 'max' => 20])) {
+    $errors['isbn'] = "Publisher's name must be between 9 and 20 characters.";
+  }
   return $errors;
 }
 
