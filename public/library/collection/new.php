@@ -61,7 +61,7 @@ $result = insert_item($item);
 			  </dl>
 			   <dl>
 				<dt>ISBN</dt>
-				<dd><input type="text" name="isbn" value="" placeholder="Enter an ISBN" required /></dd>
+				<dd><input type="number" name="isbn" value="" placeholder="Enter an ISBN" required /></dd>
 			  </dl>
 			  <dl>
 				<dt>Description</dt>

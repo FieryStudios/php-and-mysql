@@ -65,14 +65,14 @@ function validate_item($item) {
 
   $errors = [];
   // 	id, item_name, author_name, description, publisher, isbn
-  
-  // Name fields 
+
+  // Name fields
   if(is_blank($item['item_name'])) {
     $errors['item_name'] = "Item name cannot be left blank.";
   }elseif(!has_length($item['item_name'], ['min' => 2, 'max' => 255])) {
     $errors['item_name'] = "Item name must be between 2 and 255 characters.";
   }
-  
+
  if(is_blank($item['author_name'])) {
     $errors['author_name'] = "Author name cannot be left blank.";
   }elseif(!has_length($item['author_name'], ['min' => 2, 'max' => 255])) {
@@ -88,11 +88,11 @@ function validate_item($item) {
   }elseif(!has_length($item['publisher'], ['min' => 2, 'max' => 255])) {
     $errors['publisher'] = "Publisher's name must be between 2 and 255 characters.";
   }
-  
+
   if(is_blank($item['isbn'])) {
     $errors['isbn'] = "Publisher cannot be left blank.";
   }elseif(!has_length($item['isbn'], ['min' => 9, 'max' => 20])) {
-    $errors['isbn'] = "Publisher's name must be between 9 and 20 characters.";
+    $errors['isbn'] = "ISBN must be between 9 and 20 characters.";
   }
   return $errors;
 }
