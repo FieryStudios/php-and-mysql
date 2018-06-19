@@ -1,7 +1,7 @@
 	<header>
 		  <div class="row">
 			<div id="header_inner" class="col-12 bg-light">
-			  <img src="<?php echo url_for('/images/kpl-logo.png') ?>" alt="Logo for Kalamazoo Public Library"/><h1>Kalamazoo Public Library PHP/mySQL Example Site</h1>
+			  <img src="<?php echo url_for('/images/kpl-logo.png') ?>" alt="Logo for Kalamazoo Public Library"/><h1 style="margin-left:20px;">Kalamazoo Public Library Example Site</h1>
 			</div>
 			<nav class="col-12 bg-dark">
 				<a href="<?php echo url_for('/index.php') ?>">Home</a> |

@@ -12,13 +12,13 @@
 	  <div class="row">
 		<div class="col-12">
 		<h3>Purpose</h3>
-		<p>I haven't had the opportunity to use PHP or mySQL at my current job,
-		so I thought I'd use my KPL Web Application Developer resume submission as an opportunity to advance my skills in a form that would be of use to an organization like KPL. For the project, I first set up native Apache, PHP and mySQL 8 on my home iMac, then built a few examples with what I learned. This site is built using Bootstrap, Gulp, NPM, Sass, PHP 7.1.6, and mySQL 8.0.</p>
+		<p>I haven't had the opportunity to use PHP or MySQL at my current job,
+		so I thought I'd use my KPL Web Application Developer resume submission as an opportunity to advance my skills in a form that would be of use to an organization like KPL. For the project, I first set up native Apache, PHP and MySQL 8 on my home iMac, then built a few examples with what I learned. This site is built using Bootstrap, Vanilla JS, Gulp, NPM, Sass, PHP 7.1.6, and MySQL 8.0.</p>
 
 		<h3>Exercises</h3>
 		<p>
 			<ul>
-				<li><a href="./library/collection"><strong>Collection</strong></a>: A simple PHP/mySQL CRUD example</li>
+				<li><a href="./library/collection"><strong>Collection</strong></a>: A simple PHP / MySQL CRUD example</li>
                 <li><a href="./library/reference_desk"><strong>Reference Desk</strong></a>: Two Vanilla JS / AJAX / PHP exercises</li>
 			</ul>
 		</p>
