@@ -16,7 +16,7 @@
 			  <div class="items listing">
 				<h3><?php echo h($page_title); ?></h3>
                 <p>Michigan's <a href="https://data.michigan.gov" target="_blank">Open Data Portal</a>
-                has several free APIs, I used two of these as exercises in fetching JSON data from an API using vanilla JS, AJAX and PHP.</p>
+                has several free APIs, I used two of these as exercises in fetching JSON data from an API using Vanilla JS, AJAX and PHP.</p>
 			  </div>
             <div>
                 <ul>
