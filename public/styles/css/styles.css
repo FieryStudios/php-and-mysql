@@ -49,3 +49,6 @@ footer a {
 #header_inner h1 {
   font-size: 20px;
   display: inline-block; }
+
+input:not(.btn), textarea {
+  width: 50%; }
